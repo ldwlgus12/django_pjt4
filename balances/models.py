@@ -1,5 +1,9 @@
 from django.db import models
 from django.conf import settings
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
+
+
 
 # Create your models here.
 
@@ -10,3 +14,15 @@ class Balance(models.Model):
     select2_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='select2_balances')
     select1_content = models.CharField(max_length=1000)
     select2_content = models.CharField(max_length=1000)
+    image_1= ProcessedImageField(blank = True,
+                                upload_to = 'image/1/',
+                                processors= [ResizeToFill(300, 300)],
+                                format='JPEG',
+                                options={'quality' : 90},
+                                )
+    image_2= ProcessedImageField(blank = True,
+                                upload_to = 'image/2/',
+                                processors= [ResizeToFill(300, 300)],
+                                format='JPEG',
+                                options={'quality' : 90},
+                                )

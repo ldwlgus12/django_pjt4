@@ -14,7 +14,7 @@ def index(request):
 
 def create(request):
     if request.method == 'POST':
-        form = BalanceForm(request.POST)
+        form = BalanceForm(request.POST, request.FILES)
         if form.is_valid():
             balance = form.save(commit=False)
             balance.user = request.user
@@ -41,19 +41,11 @@ def detail(request, pk):
 def answer(request, pk, balance_answer):
     balance = Balance.objects.get(pk=pk)
     
-
-    if balance.select1_users.filter(pk=request.user.pk).exists():
-        if not balance.select2_users.filter(pk=request.user.pk).exists():
-            pass
-    else:
-        if not balance.select2_users.filter(pk=request.user.pk).exists():
+    if balance_answer == balance.select1_content:
+        if request.user not in balance.select2_users.all():
             balance.select1_users.add(request.user)
-    
-    if balance.select2_users.filter(pk=request.user.pk).exists():
-        if not balance.select1_users.filter(pk=request.user.pk).exists():
-            pass
     else:
-        if not balance.select1_users.filter(pk=request.user.pk).exists():
-            balance.select1_users.add(request.user)
-
+        if request.user not in balance.select1_users.all():
+            balance.select2_users.add(request.user)
     return redirect('balances:detail', pk)
+
