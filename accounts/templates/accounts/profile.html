@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>프로필 페이지</h1>
+  <h2>{{ person.username }}님</h2>
+
+  {% if request.user.username != person.username %}
+  <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user in person.followers.all %}
+      <input type="submit" value="팔로우 취소">
+    {% else %}
+      <input type="submit" value="팔로우">
+    {% endif %}
+  </form>
+  {% endif %}
+
+
+  <p>팔로워 - {{ person.followers.all|length }}</p>
+  <p>팔로잉 - {{ person.followings.all|length }}</p>
+
+  <a href="{% url 'balances:index' %}">뒤로가기</a>
+
+{% endblock content %}

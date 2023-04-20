@@ -9,6 +9,7 @@ from imagekit.processors import ResizeToFill
 
 class Balance(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_balances')
     title = models.CharField(max_length=50)
     select1_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='select1_balances')
     select2_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='select2_balances')

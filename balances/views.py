@@ -76,3 +76,12 @@ def comment_create(request, pk):
     return render(request, 'balances/detail.html', context)
 
 
+@login_required
+def likes(request, pk):
+    balance = Balance.objects.get(pk=pk)
+
+    if balance.like_users.filter(pk=request.user.pk).exists():
+        balance.like_users.remove(request.user)
+    else:
+        balance.like_users.add(request.user)
+    return redirect('balances:index')
