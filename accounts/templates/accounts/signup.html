@@ -1,11 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>signup</h1>
-<form action="{% url 'accounts:signup' %}" method="POST">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value='회원가입'>
-</form>
-<a href="{% url 'balances:index' %}"> home </a>
+<div class="bg-warning-subtle h mb-4 d-flex justify-content-center align-items-center">
+  <h1 class="text-center text-warning-emphasis">Signup</h1>
+</div>
+<div class='container mt-5 d-flex justify-content-center'>
+  <form action="{% url 'accounts:signup' %}" method='POST' class='col-5'>
+    {% csrf_token %}
+    <label class='text-warning-emphasis'>ID</label>
+    {{ form.username }} 
+    <label class='mt-2  text-warning-emphasis'>Email</label>
+    {{ form.email }}
+    <label class='mt-2  text-warning-emphasis'>Password</label>
+    {{ form.password1 }}
+    <label class='mt-2  text-warning-emphasis'>Re_Password</label>
+    {{ form.password2 }}
+    <input class="btn btn-outline-warning w-100 my-2 size" type="submit" value='Singup'>
+    <a href="{% url 'balances:index' %}" class="btn btn-outline-warning w-100 size" on-click='func()'>Home</a>
+  </form>
+</div>
+
+
+
 {% endblock content %}
