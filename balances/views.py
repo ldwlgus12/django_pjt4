@@ -36,3 +36,24 @@ def detail(request, pk):
         'balance' : balance,
     }    
     return render(request, 'balances/detail.html', context)
+
+
+def answer(request, pk, balance_answer):
+    balance = Balance.objects.get(pk=pk)
+    
+
+    if balance.select1_users.filter(pk=request.user.pk).exists():
+        if not balance.select2_users.filter(pk=request.user.pk).exists():
+            pass
+    else:
+        if not balance.select2_users.filter(pk=request.user.pk).exists():
+            balance.select1_users.add(request.user)
+    
+    if balance.select2_users.filter(pk=request.user.pk).exists():
+        if not balance.select1_users.filter(pk=request.user.pk).exists():
+            pass
+    else:
+        if not balance.select1_users.filter(pk=request.user.pk).exists():
+            balance.select1_users.add(request.user)
+
+    return redirect('balances:detail', pk)
