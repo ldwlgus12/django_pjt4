@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 from django.contrib.auth.decorators import login_required
-
-
+from django.contrib.auth import get_user_model
+from balances.models import Balance
 
 # Create your views here.
 def signup(request):
@@ -52,3 +52,26 @@ def update(request):
     else:
         form = CustomUserChangeForm(instance=request.user)    
     return render(request, 'accounts/update.html', {'form' : form})
+
+
+def profile(request, username):
+    User = get_user_model()
+    person = User.objects.get(username=username)
+    balances = Balance.objects.order_by('-pk')
+    context = {
+        'person': person,
+        'balances': balances,
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+def follow(request, pk):
+    User = get_user_model()
+    person = User.objects.get(pk=pk)
+
+    if person != request.user:
+        if request.user in person.followers.all():
+            person.followers.remove(request.user)
+        else:
+            person.followers.add(request.user)
+    return redirect('accounts:profile', person.username)
