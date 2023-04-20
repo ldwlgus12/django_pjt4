@@ -1,56 +1,64 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1>detail</h1>
+<div class="container">
+  <h1>{{ balance.title }}</h1>
 
-<p>제목: {{ balance.content }}</p>
+  <div class="row mb-3">
+    <div class="col">
+      <p>내용1: {{ balance.select1_content }}</p>
+      {% if balance.image_1 %}
+        <img src="{{ balance.image_1.url }}" alt="img_1" class="img-fluid">
+      {% else %}
+        <img src="{% static 'No_img.webp' %}" alt="img_no" class="img-fluid">
+      {% endif %}
 
-<p>내용1: {{ balance.select1_content }}</p>
-{% if balance.image_1 %}
-  <img src=" {{balance.image_1.url}} " alt="img_1">
-{% else %}
-  <img src="{% static 'No_img.webp' %}" alt="img_no">
-{% endif %}
-<form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
-  {% csrf_token %}
-  <input type="submit" value="{{ balance.select1_content }} - {{ balance.select1_users.all|length }}">
-</form>
+      <form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary">{{ balance.select1_content }} - {{ balance.select1_users.all|length }}</button>
+      </form>
+    </div>
 
-<p>내용2: {{ balance.select2_content }}</p>
-{% if balance.image_2 %}
-  <img src=" {{balance.image_2.url}} " alt="img_2">
-{% else %}
-  <img src="{% static 'No_img.webp' %}" alt="img_no">
-{% endif %}
+    <div class="col">
+      <p>내용2: {{ balance.select2_content }}</p>
+      {% if balance.image_2 %}
+        <img src="{{ balance.image_2.url }}" alt="img_2" class="img-fluid">
+      {% else %}
+        <img src="{% static 'No_img.webp' %}" alt="img_no" class="img-fluid">
+      {% endif %}
 
-<form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
-  {% csrf_token %}
-  <input type="submit" value="{{ balance.select2_content }} - {{ balance.select2_users.all|length }}">
-</form>
-<a href="{% url 'balances:index' %}">뒤로가기</a>
+      <form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary">{{ balance.select2_content }} - {{ balance.select2_users.all|length }}</button>
+      </form>
+    </div>
+  </div>
 
-<hr>
+  <div class="progress-bar">           
+    <div class="progress"> </div>
+ </div>
 
-<h3>댓글</h3>
-<form action="{% url 'balances:comment_create' balance.pk %}" method="POST">
-{% csrf_token %}
-<div class="input-group">
-  {{ comment_form }}
-  <input type="submit" value='댓글 작성'>
+  <a href="{% url 'balances:index' %}" class="btn btn-outline-secondary">뒤로가기</a>
+  
+  <hr>
+
+  <h3>댓글</h3>
+  <form action="{% url 'balances:comment_create' balance.pk %}" method="POST">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+      {{ comment_form.content }}
+      <button type="submit" class="btn btn-outline-primary">댓글 작성</button>
+    </div>
+  </form>
+  
+  <div>
+    {% for comment in comments %}
+      <p>{{ comment.user }}</p>
+      <p>{{ comment.content }}</p>
+      <hr>
+    {% endfor %}
+  </div>
 </div>
-</form>
-<br>
-
-<div>
-  {% for comment in comments %}
-    <p>{{ comment.user }}</p>
-    <p>{{ comment.content }}</p>
-    <hr>
-  {% endfor %}
-</div>
-
-
-
 {% endblock content %}
 
 
