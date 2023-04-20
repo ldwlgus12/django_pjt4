@@ -7,10 +7,25 @@
   <form action="{% url 'accounts:logout' %}" method='POST'>
   {% csrf_token %}
   <input type="submit" value='logout'>
+  <p><a href="{% url 'balances:create' %}">create</a></p>
   </form>
   <a href={% url 'accounts:update' %}> update </a>
 {% else %}
   <a href={% url 'accounts:signup' %}> signup </a>
   <a href={% url 'accounts:login' %}> login </a>
 {% endif %}
+
+{% for balance in balances %}
+<p>작성자: {{ balance.user }}</p>
+<p>제목: <a href="{% url 'balances:detail' balance.pk %}">{{ balance.title }}</a></p>
+<p>내용1: {{ balance.select1_content }}</p>
+<p>내용2: {{ balance.select2_content }}</p>
+
+<hr>
+{% endfor %}
+
+
+
+
+
 {% endblock content %}
