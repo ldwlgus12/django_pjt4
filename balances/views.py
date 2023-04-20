@@ -75,3 +75,4 @@ def comment_create(request, pk):
     }
     return render(request, 'balances/detail.html', context)
 
+
