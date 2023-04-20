@@ -1,13 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>hi</h1>
-<form action="{% url 'balances:create' %}" method='POST' enctype='multipart/form-data'>
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit">
-</form>
-<a href="{% url 'balances:index' %}">처음으로</a>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+  <h1 class="mb-4 text-center">게시글 작성</h1>
+
+  <form action="{% url 'balances:create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="title" class="form-label">제목</label>
+      {{ form.title }}
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="select1_content" class="form-label">첫 번째 주제</label>
+        {{ form.select1_content }}
+      </div>
+      <div class="col-md-6">
+        <label for="image_1" class="form-label">이미지 1</label>
+        {{ form.image_1 }}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="select2_content" class="form-label">두 번째 주제</label>
+        {{ form.select2_content }}
+      </div>
+      <div class="col-md-6">
+        <label for="image_2" class="form-label">이미지 2</label>
+        {{ form.image_2 }}
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <a href="{% url 'balances:index' %}" class="btn btn-outline-secondary me-3">처음으로</a>
+      <input type="submit" class="btn btn-outline-primary" value="작성완료">
+    </div>
+  </form>
+  </div>
+</div>
 {% endblock content %}
 
 
