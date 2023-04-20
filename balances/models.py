@@ -26,3 +26,10 @@ class Balance(models.Model):
                                 format='JPEG',
                                 options={'quality' : 90},
                                 )
+
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    balance = models.ForeignKey(Balance, on_delete=models.CASCADE)
+    content = models.TextField()

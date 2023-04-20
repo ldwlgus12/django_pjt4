@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import BalanceForm
-from .models import Balance
+from .forms import BalanceForm, CommentForm
+from .models import Balance, Comment
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def index(request):
@@ -48,4 +50,18 @@ def answer(request, pk, balance_answer):
         if request.user not in balance.select1_users.all():
             balance.select2_users.add(request.user)
     return redirect('balances:detail', pk)
+
+
+
+
+def comment_create(request, pk):
+    # if request.method == 'POST':
+    balance = Comment.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.balance = balance
+        comment.user = request.user
+        comment.save()
+    return redirect('balances:detail', balance.pk)
 

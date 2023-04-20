@@ -17,7 +17,7 @@
 </form>
 
 <p>내용2: {{ balance.select2_content }}</p>
-{% if balance.image_1 %}
+{% if balance.image_2 %}
   <img src=" {{balance.image_2.url}} " alt="img_2">
 {% else %}
   <img src="{% static 'No_img.webp' %}" alt="img_no">
@@ -28,6 +28,26 @@
   <input type="submit" value="{{ balance.select2_content }} - {{ balance.select2_users.all|length }}">
 </form>
 <a href="{% url 'balances:index' %}">뒤로가기</a>
+
+<hr>
+
+<h3>댓글</h3>
+{% comment %} <form action="{% url 'balances:comment_create' balance.pk %}" method="POST">
+{% csrf_token %}
+<div>
+  {{ comment_form }}
+  <input type="submit" value='댓글 작성'>
+</div>
+</form> {% endcomment %}
+
+<div>
+  {% for comment in comments %}
+    <p>{{ comment.user }}</p>
+    <p>{{ comment.content }}</p>
+  {% endfor %}
+</div>
+
+
 
 {% endblock content %}
 
