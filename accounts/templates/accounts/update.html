@@ -15,7 +15,7 @@
   <h1 class="text-center text-warning-emphasis">Update</h1>
 </div>
 <div class='container mt-5 d-flex justify-content-center'>
-  <form action="{% url 'accounts:update' %}" method='POST' class='col-5'>
+  <form action="{% url 'accounts:update' %}" method='POST' class='col-12 col-md-6''>
     {% csrf_token %}
     <label class='text-warning-emphasis'>ID</label>
     {{ form.username }} 
