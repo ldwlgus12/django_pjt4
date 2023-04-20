@@ -32,6 +32,8 @@
   {% endif %}
 </form>
 <p>좋아요 개수 - {{ balance.like_users.all|length }}</p>
+<p>조회수: {{balance.view_count}} </p>
+<p>{{ balance.time_since_created }}전</p>
 
 <hr>
 {% endfor %}

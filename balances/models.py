@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
-
+from django.utils import timezone
 
 
 # Create your models here.
@@ -27,6 +27,21 @@ class Balance(models.Model):
                                 format='JPEG',
                                 options={'quality' : 90},
                                 )
+    created_at = models.DateTimeField(auto_now_add=True)
+    view_count = models.IntegerField(default=0)
+    def time_since_created(self):
+        time_difference = timezone.now() - self.created_at
+        days = time_difference.days
+        hours, remainder = divmod(time_difference.seconds, 3600)
+        minutes = remainder // 60
+        if days >= 1:
+            return '{}일'.format(days)
+        elif hours >= 1:
+            return '{}시간'.format(hours)
+        elif minutes >= 1:
+            return " {}분".format(minutes)
+        else:
+            return '방금 '
 
 
 
