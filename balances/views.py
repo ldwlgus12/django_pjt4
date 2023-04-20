@@ -34,8 +34,12 @@ def create(request):
 
 def detail(request, pk):
     balance = Balance.objects.get(pk=pk)
+    comment_form = CommentForm()
+    comments = balance.comment_set.all()
     context = {
         'balance' : balance,
+        'comment_form' : comment_form,
+        'comments' : comments,
     }    
     return render(request, 'balances/detail.html', context)
 
@@ -56,12 +60,18 @@ def answer(request, pk, balance_answer):
 
 def comment_create(request, pk):
     # if request.method == 'POST':
-    balance = Comment.objects.get(pk=pk)
+    balance = Balance.objects.get(pk=pk)
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
         comment.balance = balance
         comment.user = request.user
         comment.save()
-    return redirect('balances:detail', balance.pk)
+        return redirect('balances:detail', pk)
+
+    context = {
+        'balance' : balance,
+        'comment_form' : comment_form,
+    }
+    return render(request, 'balances/detail.html', context)
 
