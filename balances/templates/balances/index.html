@@ -1,42 +1,139 @@
 {% extends "base.html" %}
 
+{% block style %}
+<style>
+  .font-c {
+    color: black;
+  }
+
+  .solid {
+    border-bottom: 2px solid #FFEF9A ;
+  }
+
+  .heart-button {
+    background-color: white;
+    border: none;
+  }
+
+  .like_on {
+    color: #ff6b6b;
+  }
+
+  .heart-b:hover {
+    color: #ff6b6b;
+  }
+
+  .time {
+    color: gray;
+    font-size: 13px;
+  }
+
+  .card-image {
+    width: 50%;
+    height: auto;
+  }
+
+  .card-back {
+    background-color: #868E96;
+    height: 143px;
+  }
+
+  .card-text{
+    color: #DEE2D9;
+    font-size: 30px;
+  }
+
+  .text-a-b {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .container {
+    min-width: 700px;
+  }  
+
+  
+</style>
+
+{% endblock style %}
+
+
 {% block content %}
-<h1>index</h1>
 
-{% if  request.user.is_authenticated %}
-  <form action="{% url 'accounts:logout' %}" method='POST'>
-  {% csrf_token %}
-  <input type="submit" value='logout'>
-  <p><a href="{% url 'balances:create' %}">create</a></p>
-  </form>
-  <a href={% url 'accounts:update' %}> update </a>
-{% else %}
-  <a href={% url 'accounts:signup' %}> signup </a>
-  <a href={% url 'accounts:login' %}> login </a>
-{% endif %}
+<div class='d-flex flex-row align-items-center justify-content-between mt-3 mb-3'>
+  <div class='ms-3'>
+    <i class="fa-solid fa-chevron-right"></i> New 게임
+  </div>
 
-{% for balance in balances %}
-<p>작성자: 
-  <a href="{% url 'accounts:profile' balance.user %}">{{ balance.user }}</a>
-</p>
-<p>제목: <a href="{% url 'balances:detail' balance.pk %}">{{ balance.title }}</a></p>
-<p>내용1: {{ balance.select1_content }}</p>
-<p>내용2: {{ balance.select2_content }}</p>
+  <div class="btn btn-warning me-3">
+    <a href="{% url 'balances:create' %}" class="font-c" style='text-decoration:none;'>밸런스 게임 생성</a>
+  </div>
+</div>
 
-<form action="{% url 'balances:likes' balance.pk %}" method="POST">
-  {% csrf_token %}
-  {% if request.user in balance.like_users.all %}
-    <input type="submit" value="좋아요 취소">
-  {% else %}
-  <input type="submit" value="좋아요">
-  {% endif %}
-</form>
-<p>좋아요 개수 - {{ balance.like_users.all|length }}</p>
-<p>조회수: {{balance.view_count}} </p>
-<p>{{ balance.time_since_created }}전</p>
+<div class='solid ms-2 me-2 mb-3'></div>
 
-<hr>
-{% endfor %}
+<div class='container '>
+  <div class='row justify-content-center'>
+    {% for balance in balances %}
+    <div class="card p-0 m-3 col-3" style="width: 18rem;">
+      {% if balance.image_1 %}
+        {% if balance.image_2 %}
+        <div class='d-flex flex-row'>
+          <img src="{{balance.image_1.url}} " class="card-img-top card-image" alt="img_1">
+          <img src="{{balance.image_2.url}} " class="card-img-top card-image" alt="img_2">
+        </div>
+        {% endif %}
+
+      {% else %}
+        <div class="card-back d-flex justify-content-center">
+          <div class="card-text align-self-center">{{ balance.select1_content }} vs {{ balance.select2_content }}</div>
+        </div>
+      {% endif %}
+      
+      <div class="card-body">
+        <div>
+          <p class='text-a-b'><a href="{% url 'balances:detail' balance.pk %}" style='text-decoration:none;'>{{ balance.select1_content }} vs {{ balance.select2_content }}</a></p>
+
+          <p>제목 : {{ balance.title }}</p>
+
+          <p>작성자 : 
+            <a href="{% url 'accounts:profile' balance.user %}" style='text-decoration:none;'>{{ balance.user }}</a>
+          </p>
+        </div>
+
+        <form action="{% url 'balances:likes' balance.pk %}" method="POST">
+          {% csrf_token %}
+          <div class='d-flex flex-row justify-content-between'>
+            {% if request.user in balance.like_users.all %}
+            {% comment %} 하트 누른 후 {% endcomment %}
+            <div class='d-flex flex-row align-items-center'>
+              <button type="submit" class="fa-solid fa-heart heart-button" style="color: #fa6b6b;"></button>
+              <span class='like_on'>{{ balance.like_users.all|length }}</span>
+            </div>
+
+            {% else %}
+            {% comment %} 하트 누르기 전 {% endcomment %}
+            <div class='d-flex flex-row align-items-center'>
+              <button type="submit" class="fa-regular fa-heart heart-button heart-b" ></button>
+              <span>{{ balance.like_users.all|length }}</span>
+            </div>
+            {% endif %}
+            
+
+            <div class='d-flex flex-row align-items-center time'>
+              <span class='me-1'>조회수 {{balance.view_count}} </span>
+              <span>|</span>
+              <span class='ms-1'>작성 시간 {{ balance.time_since_created }} 전</span>
+            </div>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 
 
 

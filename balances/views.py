@@ -14,6 +14,7 @@ def index(request):
 
 
 
+@login_required
 def create(request):
     if request.method == 'POST':
         form = BalanceForm(request.POST, request.FILES)
@@ -46,6 +47,8 @@ def detail(request, pk):
     return render(request, 'balances/detail.html', context)
 
 
+
+@login_required
 def answer(request, pk, balance_answer):
     balance = Balance.objects.get(pk=pk)
     
@@ -59,7 +62,7 @@ def answer(request, pk, balance_answer):
 
 
 
-
+@login_required
 def comment_create(request, pk):
     # if request.method == 'POST':
     balance = Balance.objects.get(pk=pk)
