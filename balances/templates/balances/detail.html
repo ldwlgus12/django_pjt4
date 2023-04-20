@@ -5,6 +5,16 @@
 <p>제목: {{ balance.content }}</p>
 <p>내용1: {{ balance.select1_content }}</p>
 <p>내용2: {{ balance.select2_content }}</p>
+<form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="{{ balance.select1_content }} - {{ balance.select1_users.all|length }}">
+</form>
+
+<form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="{{ balance.select2_content }} - {{ balance.select2_users.all|length }}">
+</form>
+<a href="{% url 'balances:index' %}">뒤로가기</a>
 
 {% endblock content %}
 
