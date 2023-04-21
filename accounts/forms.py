@@ -60,7 +60,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm):
         model = get_user_model()
-        fields = ('username', 'email',)
+        fields = ('username', 'email', 'image',)
     username = forms.CharField(
         required=True,
         label='ID',
@@ -82,6 +82,15 @@ class CustomUserChangeForm(UserChangeForm):
             'placeholder' : 'Email 입력',
             'style' : 'color:rgb(102, 77, 3);'
                       'border-color:rgb(230, 217, 179);',
+          }
+        )
+    )
+    image = forms.ImageField(
+        required=False,
+        label='Profile_image',
+        widget= forms.ClearableFileInput(
+          attrs = {
+            'class' : 'form-control',
           }
         )
     )
