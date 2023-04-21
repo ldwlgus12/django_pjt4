@@ -25,7 +25,7 @@
     <div class='container bottom d-flex'>
       {% if person.image %}
       <div class='col-12 col-sm-2'>
-        <img src="{{ person.image.url }}" alt="profile">
+        <img class='rounded' src="{{ person.image.url }}" alt="profile">
       </div>
       {% else %}
       <div class='col-12 col-sm-2'>
@@ -36,7 +36,7 @@
       </div>
       {% endif %}
       <div class='col-12 col-sm-10'>
-        <h3> {{person.username}} </h3>
+        <h3> <strong>{{person.username}}</strong></h3>
         {% if request.user.username != person.username %}
         <form action="{% url 'accounts:follow' person.pk %}" method="POST">
           {% csrf_token %}
@@ -47,11 +47,11 @@
           {% endif %}
         </form>
         {% endif %}
-        <p class='m-0'>
-          게시글 - {{ person.balance_set.count }}
-          follower - {{ person.followers.all|length }} 
-          following - {{ person.followings.all|length }}
-        </p>
+        <div class='m-0'>
+          <span class='me-2'>게시글 - {{ person.balance_set.count }}</span>
+          <span class='me-2'>follower - {{ person.followers.all|length }} </span>
+          <span class='me-2'>following - {{ person.followings.all|length }}</span>          
+        </div>
         <p>
           Email - {{person.email}}
         </p>
@@ -65,6 +65,7 @@
             {{balance.pk}} - {{balance.title}} </li>
         {% endfor %}
       </ul>
+      
     </div>
     <div class='container bottom p-3'>
       <h4>작성 댓글</h4>
