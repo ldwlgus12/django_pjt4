@@ -177,9 +177,20 @@
               {% endif %}
               
 
+              {% comment %} 글 올린 사람 닉네임 & 프사 {% endcomment %}
+              {% if balance.user.image %}
+              <div class='d-flex flex-row'>
+                <img style='width: 25px; height: 25px; border-radius: 50% 50%;' class='me-1' src="{{ user.image.url }}" alt="profile">
+                <div>
+                  <a href="{% url 'accounts:profile' balance.user %}" style='text-decoration:none; color:#949494; font-weight: bold; font-size:13px;'> {{ balance.user }}
+                  </a>
+                </div>
+              </div>
+              {% else %}
               <div class='ms-2'>
                 <i class="fa-regular fa-user fa-xs" style="color: #949494; size:12px;"></i><a href="{% url 'accounts:profile' balance.user %}" style='text-decoration:none; color:#949494; font-weight: bold; font-size:13px;'> {{ balance.user }}</a>
               </div>
+              {% endif %}
 
       
             </div>
