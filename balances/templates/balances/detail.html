@@ -7,6 +7,70 @@
     font-size: 50px;
     color: RGB(255, 202, 44);
   }
+
+  .bold-hr {
+    border: 0;
+    height: 5px;
+    background: RGB(255, 193, 7);
+  }
+
+  .comment-time {
+    font-size: 13px;
+  }
+
+  .card-back {
+    background-color: RGB(226, 226, 226);
+    height: 300px;
+    width: 300px;
+    border-radius: 15px;
+  }
+
+  .card-hover-1:hover {
+    border: 3px solid RGB(255, 193, 7);
+    border-radius: 15px;
+  }
+  .card-border-1 {
+    border: 3px solid RGB(255, 193, 7);
+    border-radius: 15px;
+  }
+
+  .card-hover-2:hover {
+    border: 3px solid RGB(13, 110, 253);
+    border-radius: 15px;
+  }
+  .card-border-2 {
+    border: 3px solid RGB(13, 110, 253);
+    border-radius: 15px;
+  }
+
+  .card-text{
+    {% comment %} color: #DEE2D9; {% endcomment %}
+    font-size: 30px;
+  }
+
+  .form-box {
+    position: relative;
+  }
+
+  .img-content-1{
+    position: absolute;
+    z-index: 1;
+    top: 90%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    font-size: 30px;
+    text-shadow: -1px 0px RGB(255, 193, 7), 0px 1px RGB(255, 193, 7), 1px 0px RGB(255, 193, 7), 0px -1px RGB(255, 193, 7);
+  }
+
+  .img-content-2{
+    position: absolute;
+    z-index: 1;
+    top: 90%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    font-size: 30px;
+    text-shadow: -1px 0px RGB(13, 110, 253), 0px 1px RGB(13, 110, 253), 1px 0px RGB(13, 110, 253), 0px -1px RGB(13, 110, 253);
+  }
 </style>
 {% endblock style %}
 
@@ -18,77 +82,132 @@
     <div class="text-center mx-5">
       <form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
         {% csrf_token %}
-        {% if balance.image_1 %}
-          <input type="image" src="{{ balance.image_1.url }}">
-          </button>
-        {% else %}
-          <input type="image" src="{% static 'No_img.webp' %}">
-        {% endif %}
+        <div class="form-box">
+
+          {% if balance.image_1 %}
+            {% if request.user in balance.select1_users.all %}
+              <input type="image" src="{{ balance.image_1.url }}" class='card-border-1'>
+              <p class="img-content-1">{{ balance.select1_content }}</p>
+            {% else %}
+              <input type="image" src="{{ balance.image_1.url }}" class='card-hover-1'>
+              <p class="img-content-1">{{ balance.select1_content }}</p>
+  
+            {% endif %}
+          {% else %}
+            {% comment %} <input type="image" src="{% static 'No_img.webp' %}"> {% endcomment %}
+            <button class="btn btn-link text-decoration-none text-dark">
+              {% if request.user in balance.select1_users.all %}
+                <div class="card-back d-flex justify-content-center card-border-1">
+                  <div class="card-text align-self-center">{{ balance.select1_content }}
+                  </div>
+                </div>
+              {% else %}
+                <div class="card-back d-flex justify-content-center card-hover-1">
+                  <div class="card-text align-self-center">{{ balance.select1_content }}
+                  </div>
+                </div>
+              {% endif %}
+            </button>
+          {% endif %}
+        </div>
       </form>
-      <form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
+      {% comment %} <form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
         {% csrf_token %}
         {% if request.user in balance.select1_users.all %}
           <button type="submit" class="btn btn-primary">{{ balance.select1_content }}</button>
         {% else %}
           <button type="submit" class="btn btn-outline-primary">{{ balance.select1_content }}</button>
         {% endif %}
-      </form>
+      </form> {% endcomment %}
     </div>
 
     <p class="align-self-center versus">vs</p>
+
     <div class="text-center mx-5">
       <form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
         {% csrf_token %}
+        <div class="form-box">
+
         {% if balance.image_2 %}
-          <input type="image" src="{{ balance.image_2.url }}">
-          </button>
+          {% if request.user in balance.select2_users.all %}
+          <input type="image" src="{{ balance.image_2.url }}" class='card-border-2'>
+          <p class="img-content-2">{{ balance.select1_content }}</p>
+          {% else %}
+          <input type="image" src="{{ balance.image_2.url }}" class='card-hover-2'>
+          <p class="img-content-2">{{ balance.select1_content }}</p>
+          {% endif %}
         {% else %}
-          <input type="image" src="{% static 'No_img.webp' %}">
+          <button class="btn btn-link text-decoration-none text-dark">
+            {% if request.user in balance.select2_users.all %}
+              <div class="card-back d-flex justify-content-center card-border-2">
+                <div class="card-text align-self-center">{{ balance.select2_content }}
+                </div>
+              </div>
+            {% else %}
+              <div class="card-back d-flex justify-content-center card-hover-2">
+                <div class="card-text align-self-center">{{ balance.select2_content }}
+                </div>
+              </div>
+            {% endif %}
+          </button>
         {% endif %}
+        </div>
+
       </form>
 
-      <form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
+      {% comment %} <form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
         {% csrf_token %}
         {% if request.user in balance.select2_users.all %}
         <button type="submit" class="btn btn-primary">{{ balance.select2_content }}</button>
       {% else %}
         <button type="submit" class="btn btn-outline-primary">{{ balance.select2_content }}</button>
       {% endif %}
-      </form>
+      </form> {% endcomment %}
     </div>
   </div>
 
-
-
   <div class="progress-stacked mb-4" style="height: 25px">
     <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="prog1" style="height: 25px;" >
-      <div class="progress-bar bg-warning progress-bar-striped" id="info1"></div>
+        <div class="progress-bar bg-warning progress-bar-striped" id="info1"></div>
     </div>
     <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="prog2" style="height: 25px;">
-      <div class="progress-bar bg-primary progress-bar-striped" id="info2"></div>
+        <div class="progress-bar bg-primary progress-bar-striped" id="info2"></div>
     </div>
   </div>
 
   <a href="{% url 'balances:index' %}" class="btn btn-outline-secondary">뒤로가기</a>
   
-  <hr>
+  {% comment %} <hr class="text-warning bold-hr"> {% endcomment %}
 
-  <h3>댓글</h3>
+  <h3 class="mt-5">댓글
+    {% if comments.all|length > 0 %}
+      ({{ comments.all|length }})
+    {% endif %}
+  </h3>
   <form action="{% url 'balances:comment_create' balance.pk %}" method="POST">
     {% csrf_token %}
     <div class="input-group mb-3">
       {{ comment_form.content }}
-      <button type="submit" class="btn btn-outline-primary">댓글 작성</button>
+      <button type="submit" class="btn btn-outline-warning">댓글 작성</button>
     </div>
   </form>
   
-  <div>
+  <hr class="text-warning bold-hr mt-4">
+
+
+  <table class="table">
     {% for comment in comments %}
-      <p>{{ comment.user }}</p>
-      <p>{{ comment.content }}</p>
-      <hr>
+      <tbody>
+        <tr class="border-bottom border-top border-dark-subtle">
+          <td style="width: 20%;" class="table-active"><a href="{% url 'accounts:profile' comment.user.username %}" class="text-decoration-none text-dark">{{ comment.user }}</a></td>
+          <td style="width: 65%;">{{ comment.content }}</td>
+          <td style="width: 25%;" class="text-secondary comment-time">{{ comment.time_since_created }}전</td>
+        </tr>
+      </tbody>
     {% endfor %}
-  </div>
+
+  </table>
+
 </div>
 {% endblock content %}
 
@@ -106,8 +225,23 @@
   const info1 = document.querySelector('#info1')
   const info2 = document.querySelector('#info2')
 
-  info1.textContent = `{{balance.select1_content}} ({{balance.select1_users.all|length}}표)`
-  info2.textContent = `{{balance.select2_content}} ({{balance.select2_users.all|length}}표)`
+  console.log({{balance.select2_users.all|length}})
+  if ({{balance.select1_users.all|length}} > 0 ){
+    info1.textContent = `{{balance.select1_content}} ({{balance.select1_users.all|length}}표)`
+  } 
+  if ({{balance.select2_users.all|length}} > 0) {
+    info2.textContent = `{{balance.select2_content}} ({{balance.select2_users.all|length}}표)`
+  }
+
+  const cBorder1 = document.querySelector('#card-border1')
+  const cBorder2 = document.querySelector('#card-border2')
+
+  {% comment %} if ({{request.user}} in {{balance.select1_users.all}}) {
+    cBorder1.setAttribute('style', 'border: 3px solid RGB(255, 193, 7);')
+  }
+  if ({{request.user}} in {{balance.select2_users.all}}) {
+    cBorder1.setAttribute('style', 'border: 3px solid RGB(13, 110, 253);')
+  } {% endcomment %}
 </script>
 {% endblock script %}
 

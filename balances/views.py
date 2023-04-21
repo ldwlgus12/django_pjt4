@@ -36,7 +36,7 @@ def create(request):
 def detail(request, pk):
     balance = Balance.objects.get(pk=pk)
     comment_form = CommentForm()
-    comments = balance.comment_set.all()
+    comments = balance.comment_set.order_by('-pk')
     balance.view_count += 1
     balance.save()
     context = {
