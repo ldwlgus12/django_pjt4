@@ -1,42 +1,73 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block style %}
+<style>
+  .versus {
+    font-size: 50px;
+    color: RGB(255, 202, 44);
+  }
+</style>
+{% endblock style %}
+
 {% block content %}
-<div class="container">
-  <h1>{{ balance.title }}</h1>
+<div class="container my-3">
+  <h1 class="text-center">{{ balance.title }}</h1>
 
-  <div class="row mb-3">
-    <div class="col">
-      <p>내용1: {{ balance.select1_content }}</p>
-      {% if balance.image_1 %}
-        <img src="{{ balance.image_1.url }}" alt="img_1" class="img-fluid">
-      {% else %}
-        <img src="{% static 'No_img.webp' %}" alt="img_no" class="img-fluid">
-      {% endif %}
-
+  <div class="d-flex justify-content-center mb-3">
+    <div class="text-center mx-5">
       <form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-primary">{{ balance.select1_content }} - {{ balance.select1_users.all|length }}</button>
+        {% if balance.image_1 %}
+          <input type="image" src="{{ balance.image_1.url }}">
+          </button>
+        {% else %}
+          <input type="image" src="{% static 'No_img.webp' %}">
+        {% endif %}
+      </form>
+      <form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
+        {% csrf_token %}
+        {% if request.user in balance.select1_users.all %}
+          <button type="submit" class="btn btn-primary">{{ balance.select1_content }}</button>
+        {% else %}
+          <button type="submit" class="btn btn-outline-primary">{{ balance.select1_content }}</button>
+        {% endif %}
       </form>
     </div>
 
-    <div class="col">
-      <p>내용2: {{ balance.select2_content }}</p>
-      {% if balance.image_2 %}
-        <img src="{{ balance.image_2.url }}" alt="img_2" class="img-fluid">
-      {% else %}
-        <img src="{% static 'No_img.webp' %}" alt="img_no" class="img-fluid">
-      {% endif %}
+    <p class="align-self-center versus">vs</p>
+    <div class="text-center mx-5">
+      <form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
+        {% csrf_token %}
+        {% if balance.image_2 %}
+          <input type="image" src="{{ balance.image_2.url }}">
+          </button>
+        {% else %}
+          <input type="image" src="{% static 'No_img.webp' %}">
+        {% endif %}
+      </form>
 
       <form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-primary">{{ balance.select2_content }} - {{ balance.select2_users.all|length }}</button>
+        {% if request.user in balance.select2_users.all %}
+        <button type="submit" class="btn btn-primary">{{ balance.select2_content }}</button>
+      {% else %}
+        <button type="submit" class="btn btn-outline-primary">{{ balance.select2_content }}</button>
+      {% endif %}
       </form>
     </div>
   </div>
 
-  <div class="progress-bar">           
-    <div class="progress"> </div>
- </div>
+
+
+  <div class="progress-stacked mb-4" style="height: 25px">
+    <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="prog1" style="height: 25px;" >
+      <div class="progress-bar bg-warning progress-bar-striped" id="info1"></div>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="prog2" style="height: 25px;">
+      <div class="progress-bar bg-primary progress-bar-striped" id="info2"></div>
+    </div>
+  </div>
 
   <a href="{% url 'balances:index' %}" class="btn btn-outline-secondary">뒤로가기</a>
   
@@ -61,7 +92,23 @@
 </div>
 {% endblock content %}
 
+{% block script %}
+<script>
+  const prog1 = document.querySelector('#prog1')
+  const prog2 = document.querySelector('#prog2')
 
+  const prog1Ratio = {{ balance.select1_users.all|length }} / ({{ balance.select1_users.all|length }} + {{ balance.select2_users.all|length }}) * 100
+  const prog2Ratio = 100 - prog1Ratio
 
+  prog1.setAttribute('style', `width: ${prog1Ratio}%; height: 25px;`)
+  prog2.setAttribute('style', `width: ${prog2Ratio}%; height: 25px;`)
+
+  const info1 = document.querySelector('#info1')
+  const info2 = document.querySelector('#info2')
+
+  info1.textContent = `{{balance.select1_content}} ({{balance.select1_users.all|length}}표)`
+  info2.textContent = `{{balance.select2_content}} ({{balance.select2_users.all|length}}표)`
+</script>
+{% endblock script %}
 
 
