@@ -44,7 +44,6 @@
   }
 
   .card-text{
-    {% comment %} color: #DEE2D9; {% endcomment %}
     font-size: 30px;
   }
 
@@ -83,7 +82,6 @@
       <form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
         {% csrf_token %}
         <div class="form-box">
-
           {% if balance.image_1 %}
             {% if request.user in balance.select1_users.all %}
               <input type="image" src="{{ balance.image_1.url }}" class='card-border-1'>
@@ -94,7 +92,6 @@
   
             {% endif %}
           {% else %}
-            {% comment %} <input type="image" src="{% static 'No_img.webp' %}"> {% endcomment %}
             <button class="btn btn-link text-decoration-none text-dark">
               {% if request.user in balance.select1_users.all %}
                 <div class="card-back d-flex justify-content-center card-border-1">
@@ -111,14 +108,6 @@
           {% endif %}
         </div>
       </form>
-      {% comment %} <form action="{% url 'balances:answer' balance.pk balance.select1_content %}" method="POST">
-        {% csrf_token %}
-        {% if request.user in balance.select1_users.all %}
-          <button type="submit" class="btn btn-primary">{{ balance.select1_content }}</button>
-        {% else %}
-          <button type="submit" class="btn btn-outline-primary">{{ balance.select1_content }}</button>
-        {% endif %}
-      </form> {% endcomment %}
     </div>
 
     <p class="align-self-center versus">vs</p>
@@ -131,10 +120,10 @@
         {% if balance.image_2 %}
           {% if request.user in balance.select2_users.all %}
           <input type="image" src="{{ balance.image_2.url }}" class='card-border-2'>
-          <p class="img-content-2">{{ balance.select1_content }}</p>
+          <p class="img-content-2">{{ balance.select2_content }}</p>
           {% else %}
           <input type="image" src="{{ balance.image_2.url }}" class='card-hover-2'>
-          <p class="img-content-2">{{ balance.select1_content }}</p>
+          <p class="img-content-2">{{ balance.select2_content }}</p>
           {% endif %}
         {% else %}
           <button class="btn btn-link text-decoration-none text-dark">
@@ -152,17 +141,7 @@
           </button>
         {% endif %}
         </div>
-
       </form>
-
-      {% comment %} <form action="{% url 'balances:answer' balance.pk balance.select2_content %}" method="POST">
-        {% csrf_token %}
-        {% if request.user in balance.select2_users.all %}
-        <button type="submit" class="btn btn-primary">{{ balance.select2_content }}</button>
-      {% else %}
-        <button type="submit" class="btn btn-outline-primary">{{ balance.select2_content }}</button>
-      {% endif %}
-      </form> {% endcomment %}
     </div>
   </div>
 
@@ -175,9 +154,12 @@
     </div>
   </div>
 
-  <a href="{% url 'balances:index' %}" class="btn btn-outline-secondary">뒤로가기</a>
-  
-  {% comment %} <hr class="text-warning bold-hr"> {% endcomment %}
+  <div class="d-flex">
+    <a href="{% url 'balances:index' %}" class="btn btn-outline-secondary me-3">뒤로가기</a>
+    <a href="{% url 'balances:delete' balance.pk %}" class="btn btn-outline-danger">삭제</a>
+
+  </div>
+
 
   <h3 class="mt-5">댓글
     {% if comments.all|length > 0 %}
