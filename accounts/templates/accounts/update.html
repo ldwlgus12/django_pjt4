@@ -15,12 +15,14 @@
   <h1 class="text-warning-emphasis">Update</h1>
 </div>
 <div class='container mt-5 d-flex justify-content-center'>
-  <form action="{% url 'accounts:update' %}" method='POST' class='col-12 col-md-6'>
+  <form action="{% url 'accounts:update' %}" method='POST'enctype="multipart/form-data" class='col-12 col-md-6'>
     {% csrf_token %}
     <label class='text-warning-emphasis'>ID</label>
     {{ form.username }} 
     <label class='mt-2  text-warning-emphasis'>Email</label>
     {{ form.email }}
+    <label class='mt-2  text-warning-emphasis'>Profile Image</label>
+    {{ form.image }}
     <input class="btn btn-outline-warning w-100 my-2 size" type="submit" value='Update'>
     <a href="{% url 'balances:index' %}" class="btn btn-outline-warning w-100 size" on-click='func()'>Home</a>
   </form>

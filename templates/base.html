@@ -40,6 +40,9 @@
       
       {% if  request.user.is_authenticated %}
       <div class='d-flex flex-row align-items-center'>
+        {% if request.user.image %}
+          <img style='width: 30px; height: 30px; border-radius: 50% 50%;' class='me-2' src="{{ user.image.url }}" alt="profile">
+        {% endif %}
         <span><a href="{% url 'accounts:profile' user.username %}" style='text-decoration:none;' class='font_admin text-dark'>{{ user }} 님</a></span>
         <form action="{% url 'accounts:logout' %}" method='POST'>
           {% csrf_token %}
