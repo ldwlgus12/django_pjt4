@@ -49,3 +49,17 @@ class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     balance = models.ForeignKey(Balance, on_delete=models.CASCADE)
     content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    def time_since_created(self):
+        time_difference = timezone.now() - self.created_at
+        days = time_difference.days
+        hours, remainder = divmod(time_difference.seconds, 3600)
+        minutes = remainder // 60
+        if days >= 1:
+            return '{}일'.format(days)
+        elif hours >= 1:
+            return '{}시간'.format(hours)
+        elif minutes >= 1:
+            return " {}분".format(minutes)
+        else:
+            return '방금 '
