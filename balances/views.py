@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import BalanceForm, CommentForm
 from .models import Balance, Comment
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 # Create your views here.
@@ -90,3 +91,15 @@ def likes(request, pk):
     else:
         balance.like_users.add(request.user)
     return redirect('balances:index')
+
+
+def search(request):
+    query = request.GET.get('q', '')
+    if query:
+        search = Balance.objects.filter(
+            Q(title__icontains=query)|
+            Q(user__username__exact=query)
+        )
+    else:
+        search = Balance.objects.all()[::-1]
+    return render(request, 'balances/index.html', {'balances':search})
