@@ -14,7 +14,7 @@
   <style>
 
     body {
-      min-width: 700px;
+      min-width: 800px;
       font-family: 'Noto Sans KR', sans-serif;
     }
 
@@ -44,6 +44,13 @@
           <i class="fa-solid fa-dog"></i>
         </a>
 
+
+        {% comment %} 검색창 {% endcomment %}
+        <form class="d-flex" role="search">
+
+          <input class="form-control me-2 search_icon" type="search" aria-label="Search">
+
+          <button class="btn btn-outline-warning" type="submit">Search</button>
 
         <form class="d-flex" action='{% url 'balances:search' %}' role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name='q'>
