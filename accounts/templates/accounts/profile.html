@@ -1,24 +1,77 @@
 {% extends 'base.html' %}
+{% block style %}
+<style>
+  .h {
+    height: 70px;
+  }
+
+  .bottom {
+    border-bottom: 1px solid rgb(255, 193, 7);
+  }
+</style>
+{% endblock style %}
 
 {% block content %}
-  <h1>프로필 페이지</h1>
-  <h2>{{ person.username }}님</h2>
-
-  {% if request.user.username != person.username %}
-  <form action="{% url 'accounts:follow' person.pk %}" method="POST">
-    {% csrf_token %}
-    {% if request.user in person.followers.all %}
-      <input type="submit" value="팔로우 취소">
-    {% else %}
-      <input type="submit" value="팔로우">
-    {% endif %}
-  </form>
-  {% endif %}
-
-
-  <p>팔로워 - {{ person.followers.all|length }}</p>
-  <p>팔로잉 - {{ person.followings.all|length }}</p>
-
-  <a href="{% url 'balances:index' %}">뒤로가기</a>
+  <div class='h mb-4 d-flex justify-content-center align-items-center bottom'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="rgb(102, 77, 3)" class="bi bi-person-circle me-2" viewBox="0 0 16 16">
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+    </svg>
+    <h1 class='text-warning-emphasis m-0'>Profile</h1>
+  </div>
+  <div class='container'>
+    <div class='container bottom'>
+      <h3> {{person.username}} </h3>
+      {% if request.user.username != person.username %}
+      <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+        {% csrf_token %}
+        {% if request.user in person.followers.all %}
+        <input class="btn btn-outline-success" type="submit" value="unfollow">
+        {% else %}
+        <input class="btn btn-outline-success" type="submit" value="follow" {% if request.user.is_anonymous %} disabled {% endif %}>
+        {% endif %}
+      </form>
+      {% endif %}
+      <p>
+        게시글 - {{ person.balance_set.count }}
+        follower - {{ person.followers.all|length }} 
+        following - {{ person.followings.all|length }}
+      </p>
+      <p>
+        Email - {{person.email}}
+      </p>
+    </div>
+    <div class='container bottom p-3'>
+      <h4>작성 게시글</h4>
+      <ul class="list-group">
+        {% for balance in person.balance_set.all %}
+          <li type="button" onclick="window.location='{% url 'balances:detail' balance.pk %}'"  class="list-group-item list-group-item-action"> 
+            {{balance.pk}} - {{balance.title}} </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class='container bottom p-3'>
+      <h4>작성 댓글</h4>
+      <ul class="list-group">
+        {% for comment in person.comment_set.all %}
+          <li type="button" onclick="window.location='{% url 'balances:detail' comment.balance.pk %}'" class="list-group-item list-group-item-action"> 
+            {{comment.content}} </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class='container bottom p-3'>
+      <h4>좋아한 글</h4>
+      <ul class="list-group">
+        {% for like in person.like_balances.all %}
+          <li type="button"  onclick="window.location='{% url 'balances:detail' like.pk %}'" class="list-group-item list-group-item-action"> 
+            {{like.title}} </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class='container row justify-content-md-center'>
+      <a class="btn btn-outline-warning col-12 col-md-5 mt-3 mx-3" href="{% url 'accounts:update' %}">Update</a>
+      <a class="btn btn-outline-warning col-12 col-md-5 mt-3 mx-3" href="{% url 'balances:index' %}">Home</a>
+    </div>
+  </div>
 
 {% endblock content %}
