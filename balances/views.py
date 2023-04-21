@@ -37,7 +37,7 @@ def create(request):
 def delete(request, pk):
     balance = Balance.objects.get(pk=pk)
     if balance.user == request.user:
-        balance.save()
+        balance.delete()
     return redirect('balances:index')
 
 

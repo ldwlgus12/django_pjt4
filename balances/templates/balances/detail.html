@@ -156,7 +156,10 @@
 
   <div class="d-flex">
     <a href="{% url 'balances:index' %}" class="btn btn-outline-secondary me-3">뒤로가기</a>
-    <a href="{% url 'balances:delete' balance.pk %}" class="btn btn-outline-danger">삭제</a>
+    <form  action="{% url 'balances:delete' balance.pk %}" method='POST'>
+      {% csrf_token %}
+      <input class="btn btn-outline-danger me-3" type="submit"value='삭제'>
+    </form>
 
   </div>
 

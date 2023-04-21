@@ -1,0 +1,283 @@
+[33mcommit 722905dcd996536774bda488015edd3f6ef8ec66[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;32mjw[m[33m)[m
+Author: Choi-jw-96 <won60917@naver.com>
+Date:   Fri Apr 21 15:40:31 2023 +0900
+
+    통합
+
+[33mcommit f132df1430dc740197e3af75d21c825cb113b4f3[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: c6057d8 5b0db45
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Fri Apr 21 14:32:38 2023 +0900
+
+    Merge pull request #16 from ldwlgus12/jiwon
+    
+    search
+
+[33mcommit 5b0db45b360879b75178b906bc4a6a2f65818045[m
+Merge: a4cc274 c6057d8
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Fri Apr 21 14:32:30 2023 +0900
+
+    Merge branch 'main' into jiwon
+
+[33mcommit a4cc27405b2c670c2c01c870e330ab75a20c7854[m[33m ([m[1;31morigin/jiwon[m[33m)[m
+Author: Choi-jw-96 <won60917@naver.com>
+Date:   Fri Apr 21 14:30:37 2023 +0900
+
+    search
+
+[33mcommit c6057d85ee2b5407b811dfceb82ad63f3ed5e25a[m
+Merge: c57b2d6 b7d55d7
+Author: 전지현 (Jihyeon Jeon) <121420134+ldwlgus12@users.noreply.github.com>
+Date:   Fri Apr 21 14:02:30 2023 +0900
+
+    Merge pull request #15 from ldwlgus12/jjh
+    
+    jjh
+
+[33mcommit b7d55d7e599aefd7d5e158b30796e1096ccfcd75[m
+Author: ldwlgus12 <ldwlgus12@naver.com>
+Date:   Fri Apr 21 14:01:52 2023 +0900
+
+    jjh
+
+[33mcommit c57b2d64803324aed3a018062b4c31109204b06e[m
+Merge: 1fb67a5 e286c64
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Fri Apr 21 14:00:33 2023 +0900
+
+    Merge pull request #14 from ldwlgus12/jw
+    
+    profil_image
+
+[33mcommit e286c647d4fe9eb83ec3b021fb63bc06b49c5b8c[m[33m ([m[1;31morigin/jw[m[33m)[m
+Author: Choi-jw-96 <won60917@naver.com>
+Date:   Fri Apr 21 13:59:42 2023 +0900
+
+    profil_image
+
+[33mcommit 1fb67a5cb30508765379b1c57cb6bfd20ddda15b[m
+Merge: 71b11d1 4bb80a3
+Author: hyundol2 <75524894+hyundol2@users.noreply.github.com>
+Date:   Fri Apr 21 13:02:23 2023 +0900
+
+    Merge pull request #13 from ldwlgus12/hyeonseok
+    
+    hyeonseok
+
+[33mcommit 4bb80a3b4cbf20cf3e62a1e73aecf60b320b3b73[m
+Author: hyundol2 <nhs503601@gmail.com>
+Date:   Fri Apr 21 13:02:06 2023 +0900
+
+    hyeonseok
+
+[33mcommit 71b11d1635473cce7cc4ad36eb9d3a99f9daaf38[m
+Merge: 9867580 250733d
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Fri Apr 21 12:42:19 2023 +0900
+
+    Merge pull request #12 from ldwlgus12/jiwon
+    
+    profil_1
+
+[33mcommit 250733dfd84c1403aed51f9f73836663d02c08f9[m
+Author: Choi-jw-96 <won60917@naver.com>
+Date:   Fri Apr 21 12:41:24 2023 +0900
+
+    profil_1
+
+[33mcommit 98675805215862ff47561e5c15bb111f858999c8[m
+Merge: 659c461 716244e
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Fri Apr 21 08:30:02 2023 +0900
+
+    Merge pull request #11 from ldwlgus12/jw
+    
+    modify
+
+[33mcommit 716244ed8d388a0a29cce4ab81f6e1c3b6ff2cde[m
+Author: Choi-jw-96 <won60917@naver.com>
+Date:   Fri Apr 21 08:28:21 2023 +0900
+
+    modify
+
+[33mcommit 659c461f6c70c9963b2948094399cfbb82b66da4[m
+Merge: 7721360 dcdeb11
+Author: 전지현 (Jihyeon Jeon) <121420134+ldwlgus12@users.noreply.github.com>
+Date:   Fri Apr 21 01:49:43 2023 +0900
+
+    Merge pull request #10 from ldwlgus12/jjh
+    
+    jjh
+
+[33mcommit dcdeb11620a8fae0ee41bfb1531c323352e3022e[m
+Author: ldwlgus12 <ldwlgus12@naver.com>
+Date:   Fri Apr 21 01:49:04 2023 +0900
+
+    jjh
+
+[33mcommit 772136086c76a71e275baa3af590dd8e769f369a[m
+Merge: 1c9d6e5 0e045f0
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Thu Apr 20 18:32:26 2023 +0900
+
+    Merge pull request #9 from ldwlgus12/jw
+    
+    LoingUdateSignup
+
+[33mcommit 0e045f082bc454883bac6249b2a7c715c5f94e03[m
+Merge: 7c1d476 1c9d6e5
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Thu Apr 20 18:32:19 2023 +0900
+
+    Merge branch 'main' into jw
+
+[33mcommit 7c1d476356c37c30e1dce9ec4fc7c3f23a4d67aa[m
+Author: Choi-jw-96 <won60917@naver.com>
+Date:   Thu Apr 20 18:28:38 2023 +0900
+
+    LoingUdateSignup
+
+[33mcommit 1c9d6e57c06ec2ec279db03bf6acafd307ad09ac[m
+Merge: 65b0fd5 295a8f8
+Author: hyundol2 <75524894+hyundol2@users.noreply.github.com>
+Date:   Thu Apr 20 17:45:27 2023 +0900
+
+    Merge pull request #8 from ldwlgus12/hyeonseok
+    
+    hyeonseok
+
+[33mcommit 295a8f88f3eb256fb8e73b44a529da4a07d268fa[m
+Author: hyundol2 <nhs503601@gmail.com>
+Date:   Thu Apr 20 17:45:06 2023 +0900
+
+    hyeonseok
+
+[33mcommit 65b0fd5c773e638711a416fa234e1d9b3ab21ad1[m
+Merge: a7df49d dd13594
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Thu Apr 20 16:34:51 2023 +0900
+
+    Merge pull request #7 from ldwlgus12/jw
+    
+    add
+
+[33mcommit dd1359495f1063d2021d03b4a5c1a66f23c132e9[m
+Author: Choi-jw-96 <won60917@naver.com>
+Date:   Thu Apr 20 16:33:30 2023 +0900
+
+    add
+
+[33mcommit a7df49d59b56077f4425bd2ac1ac0761a4cd6b99[m
+Merge: 592dee0 e6b9c65
+Author: hyundol2 <75524894+hyundol2@users.noreply.github.com>
+Date:   Thu Apr 20 16:17:56 2023 +0900
+
+    Merge pull request #6 from ldwlgus12/hyeonseok
+    
+    hyeonseok
+
+[33mcommit e6b9c654f6be50a534a90d516971a8a0fc2269a4[m
+Author: hyundol2 <nhs503601@gmail.com>
+Date:   Thu Apr 20 16:17:30 2023 +0900
+
+    hyeonseok
+
+[33mcommit 592dee01a33edf4d7ff45ee70fa80b5e02546a0d[m
+Merge: f34b427 e46362e
+Author: 전지현 (Jihyeon Jeon) <121420134+ldwlgus12@users.noreply.github.com>
+Date:   Thu Apr 20 15:41:37 2023 +0900
+
+    Merge pull request #5 from ldwlgus12/jjh
+    
+    Jjh
+
+[33mcommit e46362e3ac42162bcfca8606c1c1eaef627b15d1[m
+Author: ldwlgus12 <ldwlgus12@naver.com>
+Date:   Thu Apr 20 15:39:21 2023 +0900
+
+    jjh
+
+[33mcommit 84c3dc193c12718309645b18b353f0d95a18d654[m
+Author: ldwlgus12 <ldwlgus12@naver.com>
+Date:   Thu Apr 20 15:32:17 2023 +0900
+
+    jjh
+
+[33mcommit f34b42723588113b01553148797f670dc4956230[m
+Merge: 70343f9 2da28e8
+Author: 전지현 (Jihyeon Jeon) <121420134+ldwlgus12@users.noreply.github.com>
+Date:   Thu Apr 20 14:49:50 2023 +0900
+
+    Merge pull request #4 from ldwlgus12/jjh
+    
+    jjh
+
+[33mcommit 2da28e8e40bc9acc1144c761c054ca8e40f2119c[m
+Author: ldwlgus12 <ldwlgus12@naver.com>
+Date:   Thu Apr 20 14:49:25 2023 +0900
+
+    jjh
+
+[33mcommit 70343f9cf1d58cebdc4d2c1810cebc554ddf3e97[m
+Merge: 60f1d29 42f6f99
+Author: Choi-jw-96 <121466845+Choi-jw-96@users.noreply.github.com>
+Date:   Thu Apr 20 13:56:51 2023 +0900
+
+    Merge pull request #3 from ldwlgus12/jiwon
+    
+    jiwon
+
+[33mcommit 42f6f9968cee9f6d0bc58d9d71565ef981f89171[m
+Author: Choi-jw-96 <won60917@naver.com>
+Date:   Thu Apr 20 13:55:24 2023 +0900
+
+    jiwon
+
+[33mcommit 60f1d29d8bb8496b9ed9e1b3579efb6083d39e59[m
+Merge: 61a6633 37e08dc
+Author: hyundol2 <75524894+hyundol2@users.noreply.github.com>
+Date:   Thu Apr 20 11:26:04 2023 +0900
+
+    Merge pull request #2 from ldwlgus12/hyeonseok
+    
+    Add hyeonseok
+
+[33mcommit 37e08dcbaf12d9202b0f7742e2313626374c58cb[m
+Author: hyundol2 <nhs503601@gmail.com>
+Date:   Thu Apr 20 11:25:40 2023 +0900
+
+    Add hyeonseok
+
+[33mcommit 61a66338d4108d5b4039f51d9bc1c62cb48e2298[m
+Author: ldwlgus12 <ldwlgus12@naver.com>
+Date:   Thu Apr 20 10:26:32 2023 +0900
+
+    update_02
+
+[33mcommit c5e29ce23feec932a2dd30dd1fc66e83aaf610fc[m
+Merge: 433962c 00e9a64
+Author: hyundol2 <75524894+hyundol2@users.noreply.github.com>
+Date:   Wed Apr 19 17:49:28 2023 +0900
+
+    Merge pull request #1 from ldwlgus12/setting
+    
+    Start project
+
+[33mcommit 00e9a64cb6a1d2527d81ac78efe0e04252482f52[m
+Author: hyundol2 <nhs503601@gmail.com>
+Date:   Wed Apr 19 17:48:59 2023 +0900
+
+    Start project
+
+[33mcommit 433962c0e6df8b83cd54b2b442df804fa50489a9[m
+Author: ldwlgus12 <ldwlgus12@naver.com>
+Date:   Wed Apr 19 16:17:52 2023 +0900
+
+    update_01
+
+[33mcommit 58562e6e80b14747a7e2e54272430444b52476c0[m
+Author: 전지현 (Jihyeon Jeon) <121420134+ldwlgus12@users.noreply.github.com>
+Date:   Wed Apr 19 16:13:06 2023 +0900
+
+    Initial commit
