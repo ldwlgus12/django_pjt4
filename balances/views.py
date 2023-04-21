@@ -32,6 +32,12 @@ def create(request):
     return render(request, 'balances/create.html', context)
 
 
+@login_required
+def delete(request, pk):
+    balance = Balance.objects.get(pk=pk)
+    if balance.user == request.user:
+        balance.save()
+    return redirect('balances:index')
 
 
 def detail(request, pk):
